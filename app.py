@@ -19,7 +19,7 @@ def helloworld():
  """
 
 
-@app.get('/predict')
+@app.post('/predict')
 def predict_species(iris: IrisSpecies):
     data = iris.dict()
     print(data)

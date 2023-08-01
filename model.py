@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from pydantic import BaseModel
 import joblib
 
+
 # 2. Class which describes a single flower measurements
 class IrisSpecies(BaseModel):
     sepal_length: float
@@ -19,7 +20,7 @@ class IrisModel:
     #    saves the model
     def __init__(self):
         self.df = pd.read_csv('./data/iris.csv')
-        self.model_fname_ = 'iris_model.pkl'
+        self.model_fname_ = 'iris_model.joblib'
         try:
             self.model = joblib.load(self.model_fname_)
         except Exception as _:
@@ -29,7 +30,7 @@ class IrisModel:
 
     # 4. Perform model training using the RandomForest classifier
     def _train_model(self):
-        X = self.df.drop(['id','species'], axis=1)
+        X = self.df.drop('species', axis=1)
         y = self.df['species']
         rfc = RandomForestClassifier()
         model = rfc.fit(X, y)
